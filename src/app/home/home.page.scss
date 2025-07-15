@@ -1,17 +1,17 @@
 :host {
-  --background: var(--color-claro);
-  color: var(--texto-oscuro);
+  --background: var(--color-fondo);
+  --color: var(--color-texto);
 }
 
 ion-content {
-  --background: var(--color-claro);
-  color: var(--texto-oscuro);
+  --background: var(--color-fondo);
+  --color: var(--color-texto);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .bg-card-test {
-  background-color: var(--color-claro);
-  color: var(--texto-oscuro);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
   border-radius: 16px;
   padding: 16px;
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
@@ -42,7 +42,7 @@ swiper-container {
 .slide-content p,
 ion-card-title,
 ion-card-subtitle {
-  color: var(--texto-oscuro);
+  color: var(--color-texto);
 }
 
 .slide-content h2 {
@@ -67,9 +67,16 @@ ion-card-subtitle {
 
 ion-button {
   margin: 16px;
+  background-color: var(--color-boton);
+  color: white;
+  border-radius: 12px;
+  transition: background-color 0.3s ease;
 }
 
 .storage-test {
   margin: 20px;
   padding: 10px;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  border-radius: 12px;
 }

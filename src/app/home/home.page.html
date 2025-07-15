@@ -15,19 +15,21 @@
     </ion-card-header>
 
     <ion-card-content>
-      <swiper-container 
-        pagination="true"
-        loop="true"
-        slides-per-view="1"
-      >
-        <swiper-slide *ngFor="let genre of genres">
-          <div class="slide-content">
-            <h2>{{ genre.title }}</h2>
-            <img [src]="genre.image" [alt]="genre.title">
-            <p>{{ genre.description }}</p>
-          </div>
-        </swiper-slide>
-      </swiper-container>
+     <swiper-container 
+  pagination="true"
+  slides-per-view="1"
+  style="height: 100% !important"
+>
+  <swiper-slide *ngFor="let genre of genres">
+    <div class="slide-scroll">
+      <div class="slide-content">
+        <h2>{{ genre.title }}</h2>
+        <img [src]="genre.image" [alt]="genre.title">
+        <p>{{ genre.description }}</p>
+      </div>
+    </div>
+  </swiper-slide>
+</swiper-container>
 
       <ion-button expand="block" (click)="cambiarTema()">
         Cambiar tema
@@ -36,13 +38,9 @@
   </ion-card>
 
   <!-- Demo de Storage -->
-  <div class="storage-test">
-    <h3>Prueba de storage</h3>
-    <div [style.background-color]="colorTema"> 
-     <p> Tema Actual:{{ colorTema === colorOscuro ? 'Oscuro' : 'Claro' }}
-
-     </p> 
-    </div>
+  <div class="storage-test" [style.background-color]="colorTema">
+    <h3>Tema Actual: {{ colorTema === colorOscuro ? 'Oscuro' : 'Claro' }} </h3>
+    <ion-button (click)="goIntro()">Rregsear al intro</ion-button>
   </div>
 
 </ion-content>
