@@ -31,16 +31,22 @@
   </swiper-slide>
 </swiper-container>
 
-      <ion-button expand="block" (click)="cambiarTema()">
+      <ion-button  expand="block" (click) ="cambiarTema()">
         Cambiar tema
       </ion-button>
     </ion-card-content>
   </ion-card>
 
   <!-- Demo de Storage -->
-  <div class="storage-test" [style.background-color]="colorTema">
-    <h3>Tema Actual: {{ colorTema === colorOscuro ? 'Oscuro' : 'Claro' }} </h3>
-    <ion-button (click)="goIntro()">Rregsear al intro</ion-button>
-  </div>
+ <div
+  class="storage-test ion-padding ion-text-center d-flex flex-column justify-center align-center"
+  [style.background-color]="colorTema"
+>
+  <h3 class="ion-margin-bottom">
+    Tema Actual: {{ colorTema === colorOscuro ? 'Oscuro' : 'Claro' }}
+  </h3>
+
+  <ion-button (click)="goIntro()">Regresar al intro</ion-button>
+</div>
 
 </ion-content>

@@ -1,12 +1,28 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>intro</ion-title>
+    <ion-title>mySpotify</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="center-content">
-    <ion-title size="large">Bienvenido a mySpotify</ion-title>
-    <ion-button (click)="goBack()">Ir a mySpotify</ion-button>
-  </div>
+
+  <swiper-container
+    pagination="true"
+    slides-per-view="1"
+    style="width: 100%; height: 100%;"
+  >
+    <swiper-slide *ngFor="let genre of genres; let i = index">
+      <div class="slide-content">
+        <h2>{{ genre.title }}</h2>
+        <img [src]="genre.image" [alt]="genre.title">
+        <p>{{ genre.description }}</p>
+
+        <!-- Botón visible solo en el último slide -->
+        <ion-button *ngIf="i === genres.length - 1" expand="block" (click)="goBack()">
+          Entrar a mySpotify
+        </ion-button>
+      </div>
+    </swiper-slide>
+  </swiper-container>
+
 </ion-content>
