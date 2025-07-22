@@ -11,42 +11,48 @@
       <img src="assets/images/user.png" alt="User">
     </figure>
 
-    <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
+    <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+
+      <!-- Email -->
       <ion-item lines="none">
         <ion-input 
           label="Email" 
           labelPlacement="stacked" 
           placeholder="Escribe tu email" 
-          formControlName="email">
+          formControlName="email"
+          autocomplete="email">
         </ion-input>
       </ion-item>
 
       <div class="validation-message">
-        <ng-container *ngFor="let valitadion of validation_messages.email">
-          <div *ngIf="loginForm.get('email')?.hasError(valitadion.type) && loginForm.get('email')?.dirty">
-            {{ valitadion.menssage }}
+        <ng-container *ngFor="let validation of validation_messages.email">
+          <div *ngIf="loginForm.get('email')?.hasError(validation.type) && loginForm.get('email')?.dirty">
+            {{ validation.menssage }}
           </div>
         </ng-container>
       </div>
 
+      <!-- Contraseña -->
       <ion-item lines="none">
         <ion-input 
           type="password" 
           label="Contraseña" 
           labelPlacement="stacked" 
           placeholder="Escribe tu contraseña" 
-          formControlName="password">
+          formControlName="password"
+          autocomplete="current-password">
         </ion-input>
       </ion-item>
 
       <div class="validation-message">
-        <ng-container *ngFor="let valitadion of validation_password.password">
-          <div *ngIf="loginForm.get('password')?.hasError(valitadion.type) && loginForm.get('password')?.dirty">
-            {{ valitadion.menssage }}
+        <ng-container *ngFor="let validation of validation_password.password">
+          <div *ngIf="loginForm.get('password')?.hasError(validation.type) && loginForm.get('password')?.dirty">
+            {{ validation.menssage }}
           </div>
         </ng-container>
       </div>
 
+      <!-- Botón -->
       <ion-button 
         expand="full" 
         shape="round" 
@@ -55,6 +61,18 @@
         type="submit">
         Login
       </ion-button>
+
+      <!-- Error general -->
+      <div *ngIf="errorMessage" class="error-login-message">
+        {{ errorMessage }}
+      </div>
     </form>
+
+    <!-- Registro -->
+    <div class="registro-texto">
+      ¿No tienes cuenta?
+      <a routerLink="/register">Regístrate aquí</a>
+    </div>
+
   </div>
 </ion-content>

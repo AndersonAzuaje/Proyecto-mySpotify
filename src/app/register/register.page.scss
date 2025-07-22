@@ -1,0 +1,55 @@
+:host {
+  ion-content {
+    --background: #141414; // fondo estilo Netflix
+
+    .register-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 30px;
+      height: 100%;
+
+      form {
+        background: #000;
+        padding: 30px 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+      }
+
+      ion-item {
+        --background: #1f1f1f;
+        --color: #fff;
+        --border-color: transparent;
+        margin-bottom: 12px;
+        border-radius: 6px;
+      }
+
+      ion-input {
+        color: #fff;
+      }
+
+      .validation-message {
+        color: #ff4c4c;
+        font-size: 0.9em;
+        margin-bottom: 10px;
+        padding-left: 8px;
+      }
+
+      ion-button {
+        margin-top: 20px;
+        --background: #e50914; // rojo Netflix
+        --color: #fff;
+        --border-radius: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .error-login-message {
+        color: #ff4c4c;
+        margin-top: 15px;
+        text-align: center;
+      }
+    }
+  }
+}

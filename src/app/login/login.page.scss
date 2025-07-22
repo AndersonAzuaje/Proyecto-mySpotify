@@ -57,3 +57,21 @@ ion-button {
   --background: #e50914;
   --color: white;
 }
+.error-login-message {
+  color: #e50914;
+  font-size: 14px;
+  margin-top: 12px;
+  text-align: center;
+}
+.registro-texto {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: white;
+
+  a {
+    color: #ff3c3c;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
