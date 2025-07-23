@@ -8,11 +8,7 @@ export const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
-  {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-    canActivate: [IntroGuard, AuthGuard]
-  },
+  
   {
     path: 'intro',
     loadComponent: () => import('./intro/intro.page').then((m) => m.IntroPage)
@@ -24,5 +20,18 @@ export const routes: Routes = [
   {
     path: 'register',
     loadComponent: () => import('./register/register.page').then( m => m.RegisterPage)
-  }
+  },
+  {
+    path: 'menu',
+    loadComponent: () => import('./menu/menu.page').then( m => m.MenuPage),
+    
+    children: [
+      {
+        path: 'home',
+        loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
+        canActivate: [IntroGuard, AuthGuard]
+      },
+
+    ]
+  },
 ];

@@ -44,6 +44,18 @@
         text-transform: uppercase;
         letter-spacing: 1px;
       }
+      
+      .back-to-login-wrapper{
+        margin-top: 20px;
+        text-align: center;
+        font-size: 0.9rem;
+        color: rgb(250, 250, 250);
+        a {
+            color: #ff3c3c;
+            font-weight: bold;
+            text-decoration: none;
+        }
+      }
 
       .error-login-message {
         color: #ff4c4c;

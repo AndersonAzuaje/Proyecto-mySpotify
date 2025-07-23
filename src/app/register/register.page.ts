@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule, NavController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -33,7 +34,8 @@ export class RegisterPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private router: Router
   ) {
     this.registerForm = this.fb.group({
       nombre: ['', Validators.required],
@@ -45,6 +47,10 @@ export class RegisterPage implements OnInit {
   }
 
   ngOnInit() {}
+  
+  goToLogin() {
+  this.router.navigateByUrl('/login');
+  }
 
   registerUser() {
     if (this.registerForm.valid) {
@@ -54,6 +60,7 @@ export class RegisterPage implements OnInit {
       }).catch(err => {
         this.errorMessage = err;
       });
+      
     }
   }
 }

@@ -24,6 +24,12 @@ export class AuthService {
         credentials.password === "1234567"
       ) {
         await this.storage.set('esta-logeado', true);
+        await this.storage.set('usuario-actual', {
+          email: 'ander@gmail.com',
+          nombre: 'Admin',
+          apellido: '',
+          pais: 'Colombia'
+  });
         accept("Login Correcto");
         return;
       }
@@ -38,6 +44,7 @@ export class AuthService {
 
       if (encontrado) {
         await this.storage.set('esta-logeado', true); // Guarda sesión
+        await this.storage.set('usuario-actual', encontrado); // Guarda el usuario actual
         accept("Login Correcto");
       } else {
         reject("Correo o contraseña incorrectos");
@@ -54,6 +61,7 @@ export class AuthService {
   // Cierra la sesión
   async logoutUser(): Promise<void> {
     await this.storage.remove('esta-logeado');
+    await this.storage.remove('usuario-actual');
   }
 
   // Registro: guarda usuario en storage

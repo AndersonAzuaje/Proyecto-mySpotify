@@ -49,7 +49,7 @@ export class IntroPage implements OnInit {
  async goBack() {
     console.log("Volver a home desde intro");
     await this.storageService.set('intro-visto', true);
-    this.router.navigateByUrl("/home");
+    this.router.navigateByUrl("/menu/home");
   }
 
 }
