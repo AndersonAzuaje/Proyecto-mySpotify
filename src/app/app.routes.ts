@@ -5,7 +5,7 @@ import { AuthGuard } from './guards/auth.guard';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   
@@ -33,5 +33,9 @@ export const routes: Routes = [
       },
 
     ]
+  },
+  {
+    path: 'songs-modal',
+    loadComponent: () => import('./songs-modal/songs-modal.page').then( m => m.SongsModalPage)
   },
 ];

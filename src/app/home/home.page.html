@@ -49,6 +49,44 @@
   <h3 class="ion-margin-bottom">
     Tema Actual: {{ colorTema === colorOscuro ? 'Oscuro' : 'Claro' }}
   </h3>
+  
+  <div>
+   <h1>Albums</h1>
+  </div>
+
+   <swiper-container 
+  pagination="true"
+  loop="true"
+  slides-per-view="3"
+  
+>
+  <swiper-slide *ngFor="let album of albums">
+   
+      <div class="slide-content" (click)="showSongs(album.id)">
+        <img [src]="album.image"/>
+        <h5>{{ album.name }}</h5>
+      </div>
+  </swiper-slide>
+</swiper-container>
+
+  <div>
+   <h1>Artistas</h1>
+  </div>
+
+  <swiper-container 
+    pagination="true"
+    loop="true"
+    slides-per-view="3"
+  
+>
+   <swiper-slide *ngFor="let artists of artists">
+   
+      <div class="slide-content" (click)="artistSongs(artists.id)">
+        <img [src]="artists.image"/>
+        <h5>{{ artists.name }}</h5>
+      </div>
+    </swiper-slide>
+  </swiper-container>
 
   <ion-button (click)="goIntro()">Regresar al intro</ion-button>
 </div>

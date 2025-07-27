@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, ModalController } from '@ionic/angular/standalone';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
+import { MusicService } from '../services/music.service';
+import { albums } from 'ionicons/icons';
+import { SongsModalPage } from '../songs-modal/songs-modal.page';
+
+
 
 @Component({
   selector: 'app-home',
@@ -41,14 +46,40 @@ export class HomePage implements OnInit {
       image: "https://uvp.mx/uvpblog/wp-content/uploads/2020/04/Champeta-2.png",
       description: "La champeta es un género musical y un estilo de baile originario de la región Caribe colombiana, específicamente de Cartagena. Es una mezcla de sonidos africanos, ritmos afrocaribeños y elementos de la música electrónica, con letras que a menudo narran historias de la vida cotidiana en los barrios populares. También se refiere al baile asociado con este género musical, caracterizado por movimientos enérgicos y sensuales, y al vestuario colorido y llamativo que suelen usar los bailarines."
     }
-  ];
+  ]
+  tracks: any;
+  albums: any;
+  artists: any;
 
-  constructor(private storageService: StorageService, private router: Router) {}
+  constructor(private storageService: StorageService, private router: Router, private musicService: MusicService, private modalCtrl: ModalController) {}
 
   async ngOnInit() {
     await this.loadStorageData();
     this.aplicarTema(); // Aplicar tema al iniciar
+    this.loadTracks();
+    this.loadAlbums();
+    this.loadArtists();
   }
+
+  loadTracks(){
+    this.musicService.getTracks().then(tracks => {
+      this.tracks = tracks;
+      console.log(this.tracks, "las canciones")
+    })
+  }
+  loadAlbums(){
+    this.musicService.getAlbums().then(albums => {
+      this.albums = albums;
+      console.log(this.albums, "los albums")
+    })
+  }
+  loadArtists(){
+    this.musicService.getArtists().then(artists => {
+      this.artists = artists;
+      console.log(this.artists, "los artistas")
+    })
+  }
+
 
   async cambiarTema() {
     const esOscuro = this.colorTema === this.colorOscuro;
@@ -83,4 +114,28 @@ export class HomePage implements OnInit {
     console.log("Voler");
     this.router.navigateByUrl("/intro");
   }
-}
+  async showSongs(albumId: string) {
+    console.log("album id: ",albumId)
+    const songs = await this.musicService.getSongByAlbums(albumId);
+    console.log("songs", songs)
+    const modal = await this.modalCtrl.create({
+      component: SongsModalPage,
+      componentProps: {
+        songs: songs
+      }
+    });
+    modal.present();
+
+  }
+  async artistSongs(artistId: string) {
+    console.log("artist id: ",artistId)
+    const songs = await this.musicService.getSongByArtist(artistId);
+    console.log("songs", songs)
+    const modal = await this.modalCtrl.create({
+      component: SongsModalPage,
+      componentProps: {
+        songs: songs
+      }
+    });
+    modal.present();}
+  }
