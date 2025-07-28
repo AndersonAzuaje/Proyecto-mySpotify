@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, ModalController } from '@ionic/angular/standalone';
+import { ModalController } from '@ionic/angular/standalone';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
 import { MusicService } from '../services/music.service';
-import { albums } from 'ionicons/icons';
 import { SongsModalPage } from '../songs-modal/songs-modal.page';
+import { IonicModule } from "@ionic/angular";
 
 
 
@@ -14,7 +14,7 @@ import { SongsModalPage } from '../songs-modal/songs-modal.page';
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, CommonModule, IonButton],
+  imports: [CommonModule, IonicModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomePage implements OnInit {
@@ -50,6 +50,13 @@ export class HomePage implements OnInit {
   tracks: any;
   albums: any;
   artists: any;
+  song: any= {
+    name: '',
+    prewiev_url: '',
+    playing: false
+  };
+  currentSong: any = {};
+  newTime: any;
 
   constructor(private storageService: StorageService, private router: Router, private musicService: MusicService, private modalCtrl: ModalController) {}
 
@@ -124,6 +131,13 @@ export class HomePage implements OnInit {
         songs: songs
       }
     });
+
+    modal.onDidDismiss().then((result)=>{
+      if (result.data){
+        console.log("cancion recibida", result.data)
+        this.song =result.data
+      }
+    })
     modal.present();
 
   }
@@ -137,5 +151,36 @@ export class HomePage implements OnInit {
         songs: songs
       }
     });
+    modal.onDidDismiss().then((result)=>{
+      if (result.data){
+        console.log("cancion recibida", result.data)
+        this.song =result.data
+      }
+    })
     modal.present();}
+
+    play(){
+      this.currentSong = new Audio(this.song.preview_url);
+      this.currentSong.play();
+      this.currentSong.addEventListener("timeupdate",()=>{
+        this.newTime = (this.currentSong.currentTime * (this.currentSong.duration /10)) / 100;
+      })
+      this.song.playing =true;
+    }
+    pause(){
+      this.currentSong.pause();
+      this.song.playing = false;
+    }
+    formatTime( seconds: number){
+      if (!seconds || isNaN(seconds)) return "0:00";
+      const minutes = Math.floor(seconds/60);
+      const remainingSeconds = Math.floor(seconds % 60);
+      return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`
+    }
+    getRemainingTime(){
+      if (!this.currentSong.duration || !this.currentSong.currentTime){
+        return 0;
+      }
+      return this.currentSong.duration - this.currentSong.currentTime;
+    }
   }

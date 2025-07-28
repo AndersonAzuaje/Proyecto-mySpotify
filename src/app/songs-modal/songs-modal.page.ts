@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './songs-modal.page.html',
   styleUrls: ['./songs-modal.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule],
+  imports: [IonicModule, CommonModule, FormsModule,],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SongsModalPage implements OnInit {
@@ -31,6 +31,11 @@ export class SongsModalPage implements OnInit {
     this.modalCtrl.dismiss().then(() => {
       this.router.navigate(['/menu/home']);
     });
+  }
+
+  async selectSong(song:any){
+
+    await this.modalCtrl.dismiss(song)
   }
 
 }

@@ -5,9 +5,15 @@ import { Storage } from '@ionic/storage-angular';
   providedIn: 'root'
 })
 export class AuthService {
+  urlServer: string ="https://music.fly.dev";
 
   constructor(private storage: Storage) {
     this.init();
+  }
+  getLogin() {
+    return fetch(`${this.urlServer}/login`).then(
+      response => response.json()
+    ); 
   }
 
   // Inicializa el almacenamiento

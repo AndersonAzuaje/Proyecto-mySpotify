@@ -35,7 +35,8 @@ export class LoginPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private NavCtrl: NavController
+    private NavCtrl: NavController,
+    private auth: AuthService
   ) {
     this.loginForm = this.formBuilder.group({
       email: new FormControl(
@@ -59,6 +60,9 @@ export class LoginPage implements OnInit {
 
   loginUser() {
     if (this.loginForm.valid) {
+      this.auth.getLogin().then(login => {
+      console.log(login, "login")
+    })
       const credentials = this.loginForm.value;
 
       this.authService.loginUser(credentials).then(res => {

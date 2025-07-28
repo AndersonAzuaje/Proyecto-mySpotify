@@ -9,10 +9,10 @@ export class MusicService {
 
   constructor() { }
 
-  getTracks() {
+ getTracks() {
     return fetch(`${this.urlServer}/tracks`).then(
       response => response.json()
-    );
+    ); 
   }
   getAlbums() {
      return fetch(`${this.urlServer}/albums`).then(
